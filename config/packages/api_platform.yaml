@@ -1,0 +1,33 @@
+api_platform:
+  title: BACKEND AND API RAKHASALMA
+  version: 1.0.0
+  collection:
+    order_parameter_name: "_order"
+    pagination:
+      enabled: true
+      items_per_page_parameter_name: itemsPerPage
+  mapping:
+    paths: ["%kernel.project_dir%/src/Entity"]
+
+  formats:
+    jsonld: ["application/ld+json"]
+  docs_formats:
+    jsonld: ["application/ld+json"]
+    jsonopenapi: ["application/vnd.openapi+json"]
+    html: ["text/html"]
+  defaults:
+    stateless: true
+    cache_headers:
+      vary: ["Content-Type", "Authorization", "Origin"]
+    extra_properties:
+      standard_put: true
+      rfc_7807_compliant_errors: true
+  event_listeners_backward_compatibility_layer: false
+  keep_legacy_inflector: false
+
+  swagger:
+    versions: [3]
+    api_keys:
+      apiKey:
+        name: Authorization
+        type: header
