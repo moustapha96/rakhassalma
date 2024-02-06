@@ -48,6 +48,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $enabled = null;
+
+    public
+    function __construct()
+    {
+        $this->enabled = true;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -80,10 +88,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        // $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
+        $roles = ['ROLE_USER'];
         return array_unique($roles);
     }
 
@@ -186,6 +193,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function isEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(?bool $enabled): static
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

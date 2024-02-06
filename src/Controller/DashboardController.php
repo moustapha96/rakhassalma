@@ -19,7 +19,7 @@ class DashboardController extends AbstractController
     public function HomePage(): Response
     {
         return $this->render('home/index.html.twig', [
-            'page' => "Page d'accueil",
+            'page' => "Page presentation",
         ]);
     }
 }

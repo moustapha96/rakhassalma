@@ -48,7 +48,7 @@ security:
         # target: app_any_route
 
       remember_me:
-        secret: '%kernel.secret%'
+        secret: "%kernel.secret%"
         lifetime: 604800
         path: /
         always_remember_me: true
@@ -65,6 +65,7 @@ security:
     - { path: ^/api, roles: PUBLIC_ACCESS }
     - { path: ^/api/docs, roles: PUBLIC_ACCESS } # Allows accessing API documentations and Swagger UI
     - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/dashboard, roles: ROLE_USER }
     - { path: ^/, roles: PUBLIC_ACCESS }
 
   role_hierarchy:

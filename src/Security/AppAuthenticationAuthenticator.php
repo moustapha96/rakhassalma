@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,21 @@ class AppAuthenticationAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
+        $user = $token->getUser();
+        // dd($user);
+        /** @var User $user */
+
+        if (!$user->isEnabled()) {
+            return new RedirectResponse($this->urlGenerator->generate('app_logout'));
+        } else if ($user->isEnabled() == true &&  "ROLE_SUPER_ADMIN" === $user->getRoles()[0]) {
+            return new RedirectResponse($this->urlGenerator->generate('app_super_admin_index'));
+        } else if ($user->isEnabled() == true &&  "ROLE_ADMIN" === $user->getRoles()[0]) {
+            return new RedirectResponse($this->urlGenerator->generate('app_admin_index'));
+        } else if ($user->isEnabled() == true && "ROLE_USER" === $user->getRoles()[0]) {
+            return new RedirectResponse($this->urlGenerator->generate('app_dashboard'));
+        }
+
 
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('app_dashboard'));
