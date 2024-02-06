@@ -15,4 +15,11 @@ class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
+    #[Route('/', name: 'app_home')]
+    public function HomePage(): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'page' => "Page d'accueil",
+        ]);
+    }
 }
