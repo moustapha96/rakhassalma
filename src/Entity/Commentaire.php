@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CommentaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource]
+#[ORM\Table(name: '`rakhassalma_commentaires`')]
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
 class Commentaire
 {

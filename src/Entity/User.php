@@ -51,6 +51,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $enabled = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatar = null;
+
     public
     function __construct()
     {
@@ -90,7 +93,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles = ['ROLE_USER'];
+        $roles = ['ROLE_SUPER_ADMIN'];
+        $this->roles = $roles;
         return array_unique($roles);
     }
 
@@ -205,6 +209,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEnabled(?bool $enabled): static
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): static
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

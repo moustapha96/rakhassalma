@@ -1,0 +1,15 @@
+{
+  "name": "rakhassalma",
+  "version": "1.0.0",
+  "description": "backend application rakhassalma",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Al hussein khouma",
+  "license": "ISC"
+}

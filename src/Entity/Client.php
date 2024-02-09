@@ -47,12 +47,16 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Commentaire::class)]
     private Collection $commentaires;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Voiture::class)]
+    private Collection $voitures;
+
     public function __construct()
     {
         $this->favories = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->adresses = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->voitures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +238,36 @@ class Client
             // set the owning side to null (unless already changed)
             if ($commentaire->getClient() === $this) {
                 $commentaire->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Voiture>
+     */
+    public function getVoitures(): Collection
+    {
+        return $this->voitures;
+    }
+
+    public function addVoiture(Voiture $voiture): static
+    {
+        if (!$this->voitures->contains($voiture)) {
+            $this->voitures->add($voiture);
+            $voiture->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoiture(Voiture $voiture): static
+    {
+        if ($this->voitures->removeElement($voiture)) {
+            // set the owning side to null (unless already changed)
+            if ($voiture->getClient() === $this) {
+                $voiture->setClient(null);
             }
         }
 

@@ -35,3 +35,9 @@ services:
       $apiUrl: "%env(ORANGE_API_URL)%"
       $senderName: "%env(ORANGE_SENDER_NAME)%"
       $apiKey: "%env(ORANGE_API_KEY)%"
+
+  App\Service\PaymentService:
+    arguments:
+      $apiKey: "%PAYTECH_API_KEY%"
+      $apiSecret: "%PAYTECH_API_SECRET%"
+      $baseUrl: "%PAYTECH_URL%"
